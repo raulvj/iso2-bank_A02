@@ -101,25 +101,7 @@ public class TestCuentaConFixtures extends TestCase {
 	}
 
 	// Warning: 3 oracles and 3 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException3_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(-1);
-			saldoPepe=saldoPepe+(-1);
-			this.cuentaPepe.retirar(50);
-			saldoPepe=saldoPepe-(50);
-			this.cuentaPepe.transferir(1L, 3000, "Transferencia");
-			saldoPepe = saldoPepe-(3000)-Math.max(0.01*3000, 1.5);
-			saldoAna = saldoAna + 3000;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testImporteInvalido3_B() {
 		try {
@@ -139,47 +121,11 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException3_C() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(-1);
-			saldoPepe=saldoPepe+(-1);
-			this.cuentaPepe.retirar(50);
-			saldoPepe=saldoPepe-(50);
-			this.cuentaPepe.transferir(1L, 3000, "Transferencia");
-			saldoPepe = saldoPepe-(3000)-Math.max(0.01*3000, 1.5);
-			saldoAna = saldoAna + 3000;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException4_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(0);
-			saldoPepe=saldoPepe+(0);
-			this.cuentaPepe.retirar(-1);
-			saldoPepe=saldoPepe-(-1);
-			this.cuentaPepe.transferir(2L, 3000, "Transferencia");
-			saldoPepe = saldoPepe-(3000)-Math.max(0.01*3000, 1.5);
-			saldoAna = saldoAna + 3000;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testImporteInvalido4_B() {
 		try {
@@ -221,25 +167,7 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException5_B() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(100);
-			saldoPepe=saldoPepe+(100);
-			this.cuentaPepe.retirar(-1);
-			saldoPepe=saldoPepe-(-1);
-			this.cuentaPepe.transferir(1L, 50, "Transferencia");
-			saldoPepe = saldoPepe-(50)-Math.max(0.01*50, 1.5);
-			saldoAna = saldoAna + 50;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
@@ -262,25 +190,7 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException6_B() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(1000);
-			saldoPepe=saldoPepe+(1000);
-			this.cuentaPepe.retirar(-1);
-			saldoPepe=saldoPepe-(-1);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
@@ -303,47 +213,11 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException7_B() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(-1);
-			saldoPepe=saldoPepe+(-1);
-			this.cuentaPepe.retirar(1000);
-			saldoPepe=saldoPepe-(1000);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 	// Warning: 3 oracles and 3 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException8_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(-1);
-			saldoPepe=saldoPepe+(-1);
-			this.cuentaPepe.retirar(100000);
-			saldoPepe=saldoPepe-(100000);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testImporteInvalido8_B() {
 		try {
@@ -363,25 +237,7 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException8_C() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(-1);
-			saldoPepe=saldoPepe+(-1);
-			this.cuentaPepe.retirar(100000);
-			saldoPepe=saldoPepe-(100000);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
@@ -404,25 +260,7 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException9_B() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(0);
-			saldoPepe=saldoPepe+(0);
-			this.cuentaPepe.retirar(0);
-			saldoPepe=saldoPepe-(0);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 	@Test
 	public void testImporteInvalido10() {
@@ -445,25 +283,7 @@ public class TestCuentaConFixtures extends TestCase {
 	}
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException11_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(1000);
-			saldoPepe=saldoPepe+(1000);
-			this.cuentaPepe.retirar(0);
-			saldoPepe=saldoPepe-(0);
-			this.cuentaPepe.transferir(2L, 3000, "Transferencia");
-			saldoPepe = saldoPepe-(3000)-Math.max(0.01*3000, 1.5);
-			saldoAna = saldoAna + 3000;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testImporteInvalido11_B() {
 		try {
@@ -505,25 +325,7 @@ public class TestCuentaConFixtures extends TestCase {
 	}
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException13_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(0);
-			saldoPepe=saldoPepe+(0);
-			this.cuentaPepe.retirar(1000);
-			saldoPepe=saldoPepe-(1000);
-			this.cuentaPepe.transferir(2L, 50, "Transferencia");
-			saldoPepe = saldoPepe-(50)-Math.max(0.01*50, 1.5);
-			saldoAna = saldoAna + 50;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testImporteInvalido13_B() {
 		try {
@@ -546,25 +348,7 @@ public class TestCuentaConFixtures extends TestCase {
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException14_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(0);
-			saldoPepe=saldoPepe+(0);
-			this.cuentaPepe.retirar(100000);
-			saldoPepe=saldoPepe-(100000);
-			this.cuentaPepe.transferir(2L, 50, "Transferencia");
-			saldoPepe = saldoPepe-(50)-Math.max(0.01*50, 1.5);
-			saldoAna = saldoAna + 50;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testImporteInvalido14_B() {
 		try {
@@ -587,25 +371,7 @@ public class TestCuentaConFixtures extends TestCase {
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testImporteInvalido15_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(100);
-			saldoPepe=saldoPepe+(100);
-			this.cuentaPepe.retirar(50);
-			saldoPepe=saldoPepe-(50);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba ImporteInvalidoException");
-		}
-		catch (ImporteInvalidoException e) { }
-		catch (Exception e) {
-			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testCuentaInvalidaException15_B() {
 		try {
@@ -647,25 +413,7 @@ public class TestCuentaConFixtures extends TestCase {
 	}
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testSaldoInsuficienteException17_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(100);
-			saldoPepe=saldoPepe+(100);
-			this.cuentaPepe.retirar(1000);
-			saldoPepe=saldoPepe-(1000);
-			this.cuentaPepe.transferir(1L, 3000, "Transferencia");
-			saldoPepe = saldoPepe-(3000)-Math.max(0.01*3000, 1.5);
-			saldoAna = saldoAna + 3000;
 
-			fail("Se esperaba SaldoInsuficienteException");
-		}
-		catch (SaldoInsuficienteException e) { }
-		catch (Exception e) {
-			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testCuentaInvalidaException17_B() {
 		try {
@@ -707,47 +455,11 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testCuentaInvalidaException18_B() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(100);
-			saldoPepe=saldoPepe+(100);
-			this.cuentaPepe.retirar(100000);
-			saldoPepe=saldoPepe-(100000);
-			this.cuentaPepe.transferir(1L, 3000, "Transferencia");
-			saldoPepe = saldoPepe-(3000)-Math.max(0.01*3000, 1.5);
-			saldoAna = saldoAna + 3000;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 	// Warning: 2 oracles and 2 test templates are applicable to this test case
-	@Test
-	public void testImporteInvalido19_A() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(1000);
-			saldoPepe=saldoPepe+(1000);
-			this.cuentaPepe.retirar(1000);
-			saldoPepe=saldoPepe-(1000);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba ImporteInvalidoException");
-		}
-		catch (ImporteInvalidoException e) { }
-		catch (Exception e) {
-			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
-		}
-	}
 	@Test
 	public void testCuentaInvalidaException19_B() {
 		try {
@@ -789,44 +501,8 @@ public class TestCuentaConFixtures extends TestCase {
 			fail("Se esperaba SaldoInsuficienteException, pero se lanzó " + e);
 		}
 	}
-	@Test
-	public void testImporteInvalido20_B() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(1000);
-			saldoPepe=saldoPepe+(1000);
-			this.cuentaPepe.retirar(100000);
-			saldoPepe=saldoPepe-(100000);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba ImporteInvalidoException");
-		}
-		catch (ImporteInvalidoException e) { }
-		catch (Exception e) {
-			fail("Se esperaba ImporteInvalidoException, pero se lanzó " + e);
-		}
-	}
-	@Test
-	public void testCuentaInvalidaException20_C() {
-		try {
-			double saldoPepe=1000; double saldoAna=5000;
-			this.cuentaPepe.ingresar(1000);
-			saldoPepe=saldoPepe+(1000);
-			this.cuentaPepe.retirar(100000);
-			saldoPepe=saldoPepe-(100000);
-			this.cuentaPepe.transferir(1L, -100, "Transferencia");
-			saldoPepe = saldoPepe-(-100)-Math.max(0.01*-100, 1.5);
-			saldoAna = saldoAna + -100;
 
-			fail("Se esperaba CuentaInvalidaException");
-		}
-		catch (CuentaInvalidaException e) { }
-		catch (Exception e) {
-			fail("Se esperaba CuentaInvalidaException, pero se lanzó " + e);
-		}
-	}
 
 
 }
