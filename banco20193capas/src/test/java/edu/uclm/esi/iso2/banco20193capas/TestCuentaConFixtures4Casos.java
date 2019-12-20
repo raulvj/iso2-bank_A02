@@ -171,6 +171,4 @@ public class TestCuentaConFixtures4Casos extends TestCase {
 			}
 	}
 	
-	
-	
 }
