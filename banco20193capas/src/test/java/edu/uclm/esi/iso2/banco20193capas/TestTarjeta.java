@@ -25,8 +25,12 @@ import junit.framework.TestCase;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestExceptions extends TestCase {
-	
+public class TestTarjeta extends TestCase {
+
+	private Cliente pepe;
+	private Cuenta cuentaPepe;
+	private TarjetaCredito tc;
+
 	@Before
 	public void setUp() {
 		Manager.getMovimientoDAO().deleteAll();
@@ -35,33 +39,84 @@ public class TestExceptions extends TestCase {
 		Manager.getTarjetaDebitoDAO().deleteAll();
 		Manager.getCuentaDAO().deleteAll();
 		Manager.getClienteDAO().deleteAll();
+
+		try {
+
+			pepe = new Cliente("12345X", "Pepe", "Pérez");
+			pepe.insert();
+
+			cuentaPepe = new Cuenta(1);
+
+			cuentaPepe.addTitular(pepe);
+			cuentaPepe.insert();
+
+			cuentaPepe.ingresar(1000);
+
+			tc = cuentaPepe.emitirTarjetaCredito("12345X", 1000);
+			
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e);
+		}
+
+	}
+
+	
+	
+	@Test
+	public void testGetTitular() {
+
+		try {
+
+			tc.getTitular();
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e);
+		}
 	}
 	
 	@Test
-	public void testClienteNoAutorizado() {
+	public void testSetId() {
 
 		try {
-			Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
-			Cliente pepito = new Cliente("12345Y", "Pepito", "Pérecito");
-			pepe.insert();
-			pepito.insert();
-			
-			Cuenta cuentaPepe = new Cuenta(1);
-			cuentaPepe.addTitular(pepe);
-			cuentaPepe.insert();
-			cuentaPepe.ingresar(1000);
-			assertTrue(cuentaPepe.getSaldo()==1000);			
-			
-			cuentaPepe.emitirTarjetaCredito(pepito.getNif(), 1000);
-			fail("Esperaba ClienteNoAutorizadoException");
-			
-			} catch (ClienteNoAutorizadoException e) {
-			} catch (Exception e) {
-				fail("Esperaba ClienteNoAutorizadoException" + e);
-			}
-		
-		
-		
+
+			tc.setId((long)2332);
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e);
+		}
 	}
-	
+	@Test
+	public void testSetPin() {
+
+		try {
+
+			tc.setPin(1234);
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e);
+		}
+	}
+	@Test
+	public void testGetCuenta() {
+
+		try {
+
+			tc.getCuenta();
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e);
+		}
+	}
+	@Test
+	public void testSetActiva() {
+
+		try {
+
+			tc.setActiva(true);
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e);
+		}
+	}
+
 }
