@@ -44,6 +44,7 @@ public class TestMovimientoTarjeta extends TestCase {
 			fail("Unexpected Exception: " + e);
 		}
 	}
+	
 	@Test
 	public void testSetId() {
 		try {
@@ -53,15 +54,7 @@ public class TestMovimientoTarjeta extends TestCase {
 			fail("Excepción inesperada: " + e);
 		}
 	}
-	@Test
-	public void testGetId() {
-		try {
-			
-			movtarjeta.getId();
-		} catch (Exception e) {
-			fail("Excepción inesperada: " + e);
-		}
-	}
+	
 	@Test
 	public void testSetTarjeta() {
 		try {
@@ -93,15 +86,6 @@ public class TestMovimientoTarjeta extends TestCase {
 		}
 	}
 	@Test
-	public void testGetImporte() {
-		try {
-			
-			movtarjeta.getImporte();
-		} catch (Exception e) {
-			fail("Excepción inesperada: " + e);
-		}
-	}
-	@Test
 	public void testSetConcepto() {
 		try {
 		
@@ -115,24 +99,6 @@ public class TestMovimientoTarjeta extends TestCase {
 		try {
 			
 			movtarjeta.getConcepto();
-		} catch (Exception e) {
-			fail("Excepción inesperada: " + e);
-		}
-	}
-	@Test
-	public void testSetLiquidado() {
-		try {
-			
-			movtarjeta.setLiquidado(true);
-		} catch (Exception e) {
-			fail("Excepción inesperada: " + e);
-		}
-	}
-	@Test
-	public void testIsLiquidado() {
-		try {
-			
-			movtarjeta.isLiquidado();
 		} catch (Exception e) {
 			fail("Excepción inesperada: " + e);
 		}
