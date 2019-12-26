@@ -24,7 +24,7 @@ import junit.framework.TestCase;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestCuenta extends TestCase {
-	
+
 	@Before
 	public void setUp() {
 		Manager.getMovimientoDAO().deleteAll();
@@ -34,7 +34,7 @@ public class TestCuenta extends TestCase {
 		Manager.getCuentaDAO().deleteAll();
 		Manager.getClienteDAO().deleteAll();
 	}
-	
+
 	@Test
 	public void testRetiradaSinSaldo() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
@@ -55,45 +55,45 @@ public class TestCuenta extends TestCase {
 		} catch (SaldoInsuficienteException e) {
 		}
 	}
-	
+
 	@Test
 	public void testCreacionDeUnaCuenta() {
 		try {
 			Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 			pepe.insert();
-			
+
 			Cuenta cuentaPepe = new Cuenta(1);
 			cuentaPepe.addTitular(pepe);
 			cuentaPepe.insert();
 			cuentaPepe.ingresar(1000);
-			assertTrue(cuentaPepe.getSaldo()==1000);
+			assertTrue(cuentaPepe.getSaldo() == 1000);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testNoCreacionDeUnaCuenta() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
-		
+
 		Cuenta cuentaPepe = new Cuenta(1);
-		
+
 		try {
 			cuentaPepe.insert();
 			fail("Esperaba CuentaSinTitularesException");
 		} catch (CuentaSinTitularesException e) {
 		}
 	}
-	
+
 	@Test
 	public void testTransferencia() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
-		
+
 		Cliente ana = new Cliente("98765F", "Ana", "López");
 		ana.insert();
-		
+
 		Cuenta cuentaPepe = new Cuenta(1);
 		Cuenta cuentaAna = new Cuenta(2);
 		try {
@@ -101,10 +101,10 @@ public class TestCuenta extends TestCase {
 			cuentaPepe.insert();
 			cuentaAna.addTitular(ana);
 			cuentaAna.insert();
-			
+
 			cuentaPepe.ingresar(1000);
-			assertTrue(cuentaPepe.getSaldo()==1000);
-			
+			assertTrue(cuentaPepe.getSaldo() == 1000);
+
 			cuentaPepe.transferir(cuentaAna.getId(), 500, "Alquiler");
 			assertTrue(cuentaPepe.getSaldo() == 495);
 			assertTrue(cuentaAna.getSaldo() == 500);
@@ -112,39 +112,62 @@ public class TestCuenta extends TestCase {
 			fail("Excepción inesperada: " + e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testCompraConTC() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
-		
+
 		Cuenta cuentaPepe = new Cuenta(1);
+		TarjetaCredito tc = null;
+
 		try {
 			cuentaPepe.addTitular(pepe);
 			cuentaPepe.insert();
-			
+
 			cuentaPepe.ingresar(1000);
-			cuentaPepe.retirar(200);;
-			assertTrue(cuentaPepe.getSaldo()==800);
-			
-			TarjetaCredito tc = cuentaPepe.emitirTarjetaCredito("12345X", 1000);
+			cuentaPepe.retirar(200);
+			;
+			assertTrue(cuentaPepe.getSaldo() == 800);
+
+			tc = cuentaPepe.emitirTarjetaCredito("12345X", 1000);
 			tc.comprar(tc.getPin(), 300);
-			assertTrue(tc.getCreditoDisponible()==700);
+			assertTrue(tc.getCreditoDisponible() == 700);
 			tc.liquidar();
-			assertTrue(tc.getCreditoDisponible()==1000);
-			assertTrue(cuentaPepe.getSaldo()==500);
+			assertTrue(tc.getCreditoDisponible() == 1000);
+			assertTrue(tc.getCredito() == 1000);
+			assertTrue(cuentaPepe.getSaldo() == 500);
 		} catch (Exception e) {
 			fail("Excepción inesperada: " + e.getMessage());
 		}
+
+		try {
+			tc.comprar(tc.getPin(), -300);
+			fail("Expecting ImporteInvalidoException");
+		} catch (ImporteInvalidoException e) {
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e.getMessage());
+		}
+
+		try {
+			tc.comprar(tc.getPin(), 30000);
+			fail("Expecting ImporteInvalidoException");
+		} catch (SaldoInsuficienteException e) {
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e.getMessage());
+		}
+
 	}
-	
+
 	@Test
 	public void testTransferenciaOK() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
 		Cliente ana = new Cliente("98765K", "Ana", "López");
 		ana.insert();
-		
+
 		Cuenta cuentaPepe = new Cuenta(1);
 		Cuenta cuentaAna = new Cuenta(2);
 		try {
@@ -154,61 +177,75 @@ public class TestCuenta extends TestCase {
 			cuentaAna.addTitular(ana);
 			cuentaAna.insert();
 			cuentaPepe.transferir(2L, 500, "Alquiler");
-			assertTrue(cuentaPepe.getSaldo()==495);
-			assertTrue(cuentaAna.getSaldo()==500);
+			assertTrue(cuentaPepe.getSaldo() == 495);
+			assertTrue(cuentaAna.getSaldo() == 500);
 		} catch (Exception e) {
 			fail("Excepción inesperada");
 		}
 	}
-	
+
 	@Test
 	public void testTransferenciaALaMismaCuenta() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
-		
+
 		Cuenta cuentaPepe = new Cuenta(1);
 		try {
 			cuentaPepe.addTitular(pepe);
 			cuentaPepe.insert();
 			cuentaPepe.ingresar(1000);
-			cuentaPepe.transferir(1L,100, "Alquiler");
+			cuentaPepe.transferir(1L, 100, "Alquiler");
 			fail("Esperaba CuentaInvalidaException");
 		} catch (CuentaInvalidaException e) {
 		} catch (Exception e) {
 			fail("Se ha lanzado una excepción inesperada: " + e);
 		}
 	}
-	
+
 	@Test
 	public void testCompraPorInternetConTC() {
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
-		
+
 		Cuenta cuentaPepe = new Cuenta(1);
+		TarjetaCredito tc = null;
+
 		try {
 			cuentaPepe.addTitular(pepe);
 			cuentaPepe.insert();
-			
+
 			cuentaPepe.ingresar(1000);
-			cuentaPepe.retirar(200);;
-			assertTrue(cuentaPepe.getSaldo()==800);
-			
-			TarjetaCredito tc = cuentaPepe.emitirTarjetaCredito("12345X", 1000);
+			cuentaPepe.retirar(200);
+			;
+			assertTrue(cuentaPepe.getSaldo() == 800);
+
+			tc = cuentaPepe.emitirTarjetaCredito("12345X", 1000);
 			int token = tc.comprarPorInternet(tc.getPin(), 300);
-			assertTrue(tc.getCreditoDisponible()==1000);
+			assertTrue(tc.getCreditoDisponible() == 1000);
 			tc.confirmarCompraPorInternet(token);
-			assertTrue(tc.getCreditoDisponible()==700);
+			assertTrue(tc.getCreditoDisponible() == 700);
 			tc.liquidar();
-			assertTrue(tc.getCreditoDisponible()==1000);
-			assertTrue(cuentaPepe.getSaldo()==500);
+			assertTrue(tc.getCreditoDisponible() == 1000);
+			assertTrue(cuentaPepe.getSaldo() == 500);
 		} catch (Exception e) {
 			fail("Excepción inesperada: " + e.getMessage());
 		}
+
+		try {
+			int token = tc.comprarPorInternet(tc.getPin(), -300);
+			tc.confirmarCompraPorInternet(token);
+			fail("Expecting ImporteInvalidoException");
+		} catch (ImporteInvalidoException e) {
+
+		} catch (Exception e) {
+			fail("Unexpected Exception: " + e.getMessage());
+		}
+
 	}
-	
+
 	@Test
 	public void testWrongInternet() {
-		Cliente pepe = new Cliente("12345X","Pepe", "Pérez");
+		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
 		Cuenta cuentaPepe = new Cuenta(1);
 		try {
@@ -220,17 +257,17 @@ public class TestCuenta extends TestCase {
 		try {
 			TarjetaCredito tcPepe = cuentaPepe.emitirTarjetaCredito(pepe.getNif(), 3000);
 			int token = tcPepe.comprarPorInternet(tcPepe.getPin(), 500);
-			tcPepe.confirmarCompraPorInternet(token+1);
+			tcPepe.confirmarCompraPorInternet(token + 1);
 			fail("Excepted TokenInvalidoException, but no exception throw");
 		} catch (TokenInvalidoException e) {
 		} catch (Exception e) {
 			fail("Unexpected Exception" + e);
 		}
 	}
-	
+
 	@Test
 	public void testTarjetaBloqueada() {
-		
+
 		Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
 		pepe.insert();
 		Cuenta cuentaPepe = new Cuenta(1);
@@ -246,9 +283,9 @@ public class TestCuenta extends TestCase {
 		} catch (Exception e) {
 			fail("Unexpected Exception " + e);
 		}
-		for (int i = 0; i<3; i++) {
+		for (int i = 0; i < 3; i++) {
 			try {
-				tcPepe.sacarDinero(tcPepe.getPin()+1, 100);
+				tcPepe.sacarDinero(tcPepe.getPin() + 1, 100);
 				fail("Esperaba PinInvalidoException");
 			} catch (PinInvalidoException e) {
 			} catch (Exception e) {
