@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+/**
+ * @author ERV50
+ *
+ */
 @Entity
 public class Cliente {
 @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,24 +34,37 @@ this.apellidos = apellidos1;
 public Long getId() {
 return id;
 }
+/**
+ * @param id2 Id del cliente
+ */
 public void setId(final Long id2) {
 this.id = id2;
 }
 public String getNif() {
 return nif;
 }
+/**
+ * @param nif2 Id NIF del cliente
+ */
 public void setNif(final String nif2) {
 this.nif = nif2;
 }
 public String getNombre() {
 return nombre;
 }
+/**
+ * @param nombre2 Nombre del cliente
+ */
 public void setNombre(final String nombre2) {
 this.nombre = nombre2;
 }
+
 public String getApellidos() {
 return apellidos;
 }
+/**
+ * @param apellidos2 Apellidos del cliente
+ */
 public void setApellidos(final String apellidos2) {
 this.apellidos = apellidos2;
 }

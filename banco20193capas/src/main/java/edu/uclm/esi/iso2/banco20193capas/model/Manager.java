@@ -22,6 +22,14 @@ private static ClienteDAO clienteDAO;
 private static TarjetaDebitoDAO tarjetaDebitoDAO;
 private static TarjetaCreditoDAO tarjetaCreditoDAO;
 private Manager() { }
+/**
+ * @param cuentaDao1 CuentaDAO cuentaDao
+ * @param movimientoDao1 MovimientoCuentaDAO movimientoDao
+ * @param clienteDAO1 ClienteDAO clienteDAO
+ * @param movimientoTCDAO1 MovimientoTarjetaCreditoDAO movimientoTCDAO
+ * @param tarjetaDebitoDAO1 TarjetaDebitoDAO tarjetaDebitoDAO
+ * @param tarjetaCreditoDAO1 TarjetaCreditoDAO tarjetaCreditoDAO
+ */
 @Autowired
 private void loadDAO(final CuentaDAO cuentaDao1,
 final MovimientoCuentaDAO movimientoDao1,

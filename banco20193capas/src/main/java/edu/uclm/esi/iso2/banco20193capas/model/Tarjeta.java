@@ -50,6 +50,11 @@ for (int i = ZERO; i <= THREE; i++) {
 pin = (int) (pin + dado.nextInt(TEN) * Math.pow(TEN, i));
 }
 }
+/**
+ * @param pin1 Pin a comprobar
+ * @throws TarjetaBloqueadaException Si la tarjeta está bloqueada
+ * @throws PinInvalidoException Si el pin introducido es incorrecto
+ */
 protected void comprobar(final int pin1) throws TarjetaBloqueadaException,
 PinInvalidoException {
 if (!this.isActiva()) {
@@ -89,28 +94,55 @@ throw new TokenInvalidoException();
 }
 this.comprar(this.pin, this.compra.getImporte());
 }
+/**
+ *
+ */
 protected abstract void bloquear();
+/**
+ * @return id
+ */
 public Long getId() {
 return id;
 }
+/**
+ * @param id1 Id tarjeta
+ */
 public void setId(final Long id1) {
 this.id = id1;
 }
+/**
+ * @return pin
+ */
 public Integer getPin() {
 return pin;
 }
+/**
+ * @param pin1 Pin tarjeta
+ */
 public void setPin(final Integer pin1) {
 this.pin = pin1;
 }
+/**
+ * @return titular
+ */
 public Cliente getTitular() {
 return titular;
 }
+/**
+ * @param titular1 Titular tarjeta
+ */
 public void setTitular(final Cliente titular1) {
 this.titular = titular1;
 }
+/**
+ * @return cuenta
+ */
 public Cuenta getCuenta() {
 return cuenta;
 }
+/**
+ * @param cuenta1 Cuenta de la tarjeta
+ */
 public void setCuenta(final Cuenta cuenta1) {
 this.cuenta = cuenta1;
 }
@@ -120,15 +152,46 @@ this.cuenta = cuenta1;
 public Boolean isActiva() {
 return activa;
 }
+/**
+ * @param activa1 Set activa
+ */
 public void setActiva(final Boolean activa1) {
 this.activa = activa1;
 }
+/**
+ * @param pin1 Pin usado
+ * @param importe Importe realizado
+ * @throws ImporteInvalidoException Si el importe is less than or equal to 0
+ * @throws SaldoInsuficienteException Si el saldo de la cuenta asociada
+ * ({@link Cuenta#getSaldo()}) a la tarjeta es menor que el importe
+ * @throws TarjetaBloqueadaException Si la tarjeta está bloqueada
+ * @throws PinInvalidoException Si el pin introducido es incorrecto
+ */
 public abstract void sacarDinero(int pin1, double importe) throws
 ImporteInvalidoException, SaldoInsuficienteException,
 TarjetaBloqueadaException, PinInvalidoException;
+/**
+ * @param pin1 Pin usado
+ * @param importe Importe realizado
+ * @return integer
+ * @throws TarjetaBloqueadaException Si la tarjeta está bloqueada
+ * @throws PinInvalidoException Si el pin introducido es incorrecto
+ * @throws SaldoInsuficienteException Si el saldo de la cuenta asociada
+ * ({@link Cuenta#getSaldo()}) a la tarjeta es menor que el importe
+ * @throws ImporteInvalidoException Si el importe is less than or equal to 0
+ */
 public abstract Integer comprarPorInternet(int pin1, double importe)
 throws TarjetaBloqueadaException, PinInvalidoException,
 SaldoInsuficienteException, ImporteInvalidoException;
+/**
+ * @param pin1 Pin usado
+ * @param importe Importe realizado
+ * @throws ImporteInvalidoException Si el importe is less than or equal to 0
+ * @throws SaldoInsuficienteException Si el saldo de la cuenta asociada
+ * ({@link Cuenta#getSaldo()}) a la tarjeta es menor que el importe
+ * @throws TarjetaBloqueadaException Si la tarjeta está bloqueada
+ * @throws PinInvalidoException Si el pin introducido es incorrecto
+ */
 public abstract void comprar(int pin1, double importe) throws
 ImporteInvalidoException, SaldoInsuficienteException,
 TarjetaBloqueadaException, PinInvalidoException;
