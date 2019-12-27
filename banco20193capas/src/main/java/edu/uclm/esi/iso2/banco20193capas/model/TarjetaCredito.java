@@ -146,6 +146,9 @@ gastos = gastos + m.getImporte();
 }
 return credito - gastos;
 }
+/**
+ * @param credito1 Credito a usar
+ */
 public void setCredito(final Double credito1) {
 this.credito = credito1;
 }

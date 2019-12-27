@@ -33,10 +33,16 @@ static final double UNOPTOCINCO = 1.5;
 public Cuenta() {
 this.titulares = new ArrayList<>();
 }
+/**
+ * @param id1 Id cuenta
+ */
 public Cuenta(final Long id1) {
 this();
 this.id = id1;
 }
+/**
+ * @param id1 Id cuenta
+ */
 public Cuenta(final Integer id1) {
 this(Long.valueOf(id1));
 }
@@ -62,6 +68,11 @@ this.titulares.add(cliente);
 public void ingresar(final double importe) throws ImporteInvalidoException {
 this.ingresar(importe, "Ingreso de efectivo");
 }
+/**
+ * @param importe Importe a ingresar
+ * @param concepto Concepto del ingreso
+ * @throws ImporteInvalidoException
+ */
 private void ingresar(final double importe, final String concepto)
 throws ImporteInvalidoException {
 if (importe <= 0) {
@@ -83,6 +94,12 @@ public void retirar(final double importe) throws ImporteInvalidoException,
 SaldoInsuficienteException {
 this.retirar(importe, "Retirada de efectivo");
 }
+/**
+ * @param importe Importe retiro
+ * @param concepto Concepto retiro
+ * @throws ImporteInvalidoException
+ * @throws SaldoInsuficienteException
+ */
 private void retirar(final double importe, final String concepto) throws
 ImporteInvalidoException, SaldoInsuficienteException {
 if (importe <= 0) {
@@ -130,6 +147,11 @@ this.retirar(comision, "Comisión por transferencia");
 Cuenta destino = this.load(numeroCuentaDestino);
 destino.ingresar(importe, "Transferencia recibida");
 }
+/**
+ * @param numero Numero cuenta
+ * @return
+ * @throws CuentaInvalidaException
+ */
 private Cuenta load(final Long numero) throws CuentaInvalidaException {
 Optional<Cuenta> optCuenta = Manager.getCuentaDAO().findById(numero);
 if (!optCuenta.isPresent()) {
@@ -239,12 +261,18 @@ this.id = id1;
 public List<Cliente> getTitulares() {
 return titulares;
 }
+/**
+ * @param titulares1 Titulares
+ */
 public void setTitulares(final List<Cliente> titulares1) {
 this.titulares = titulares1;
 }
 public boolean isCreada() {
 return creada;
 }
+/**
+ * @param creada1 Set de crear
+ */
 public void setCreada(final boolean creada1) {
 this.creada = creada1;
 }
