@@ -36,12 +36,12 @@ final MovimientoCuentaDAO movimientoDao1,
 final ClienteDAO clienteDAO1, final MovimientoTarjetaCreditoDAO
 movimientoTCDAO1, final TarjetaDebitoDAO tarjetaDebitoDAO1,
 final TarjetaCreditoDAO tarjetaCreditoDAO1) {
-Manager.cuentaDAO = cuentaDao1;
-Manager.movimientoDAO = movimientoDao1;
-Manager.clienteDAO = clienteDAO1;
-Manager.movimientoTarjetaCreditoDAO = movimientoTCDAO1;
-Manager.tarjetaDebitoDAO = tarjetaDebitoDAO1;
-Manager.tarjetaCreditoDAO = tarjetaCreditoDAO1;
+Manager.setCuentaDAO(cuentaDao1);
+Manager.setMovimientoDAO(movimientoDao1);
+Manager.setClienteDAO(clienteDAO1);
+Manager.setMovimientoTarjetaCreditoDAO(movimientoTCDAO1);
+Manager.setTarjetaCreditoDAO(tarjetaCreditoDAO1);
+Manager.setTarjetaDebitoDAO(tarjetaDebitoDAO1);
 }
 public static CuentaDAO getCuentaDAO() {
 return cuentaDAO;
@@ -60,5 +60,52 @@ return tarjetaDebitoDAO;
 }
 public static TarjetaCreditoDAO getTarjetaCreditoDAO() {
 return tarjetaCreditoDAO;
+}
+/**
+ * @param cuentaDAO1 parameter given
+ */
+public static synchronized void setCuentaDAO(
+final CuentaDAO cuentaDAO1) {
+Manager.cuentaDAO = cuentaDAO1;
+}
+
+/**
+ * @param movimientoDAO1 parameter given
+ */
+public static synchronized void setMovimientoDAO(
+final MovimientoCuentaDAO movimientoDAO1) {
+Manager.movimientoDAO = movimientoDAO1;
+}
+
+/**
+ * @param movimientoTarjetaCreditoDAO1 parameter given
+ */
+public static synchronized void setMovimientoTarjetaCreditoDAO(
+final MovimientoTarjetaCreditoDAO movimientoTarjetaCreditoDAO1) {
+Manager.movimientoTarjetaCreditoDAO = movimientoTarjetaCreditoDAO1;
+}
+
+/**
+ * @param clienteDAO1 parameter given
+ */
+public static synchronized void setClienteDAO(
+final ClienteDAO clienteDAO1) {
+Manager.clienteDAO = clienteDAO1;
+}
+
+/**
+ * @param tarjetaDebitoDAO1 parameter given
+ */
+public static synchronized void setTarjetaDebitoDAO(
+final TarjetaDebitoDAO tarjetaDebitoDAO1) {
+Manager.tarjetaDebitoDAO = tarjetaDebitoDAO1;
+}
+
+/**
+ * @param tarjetaCreditoDAO1 parameter given
+ */
+public static synchronized void setTarjetaCreditoDAO(
+final TarjetaCreditoDAO tarjetaCreditoDAO1) {
+Manager.tarjetaCreditoDAO = tarjetaCreditoDAO1;
 }
 }
