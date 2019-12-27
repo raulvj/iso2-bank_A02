@@ -217,7 +217,7 @@ Manager.getTarjetaDebitoDAO().save(tarjeta);
 return tarjeta;
 }
 /**
-* Emite una tarjeta de débito asociada a esta cuenta.
+* Emite una tarjeta de crébito asociada a esta cuenta.
 * @param nif El nif del cliente para el cual se emite esta tarjeta
 * @param credito El crédito concedido
 * @return La tarjeta de crédito (@see

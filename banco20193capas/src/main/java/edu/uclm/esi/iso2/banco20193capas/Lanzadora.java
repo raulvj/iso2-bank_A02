@@ -12,7 +12,7 @@ import edu.uclm.esi.iso2.banco20193capas.model.Cuenta;
 @SpringBootApplication
 public class Lanzadora {
 /**
- * 
+ *
  */
 static final double IMPORTE = 1000; //1000 is a magic number!
 /**
@@ -20,7 +20,7 @@ static final double IMPORTE = 1000; //1000 is a magic number!
  * @param args Main definition
  * @throws Exception Generic exception
  */
-private static void main(final String[] args) throws Exception {
+public static void main(final String[] args) throws Exception {
 SpringApplication.run(Lanzadora.class, args);
 try {
 Cliente pepe = new Cliente("12345X", "Pepe", "Pérez");
